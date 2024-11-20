@@ -5,9 +5,9 @@
 #define BLYNK_PRINT Serial
 
 
-#define BLYNK_TEMPLATE_ID "TMPL38un2cZYR"
-#define BLYNK_TEMPLATE_NAME "Plant Watering System"
-#define BLYNK_AUTH_TOKEN "iyEMcG5DzfHfN46bdnksdxvrtH28qBFm"
+#define BLYNK_TEMPLATE_ID ""
+#define BLYNK_TEMPLATE_NAME ""
+#define BLYNK_AUTH_TOKEN "" //Paste your blynk template Id, template name and auth token after creating the device on the Blynk platform
 
 #include <WiFi.h>
 #include <WiFiClient.h>
@@ -21,11 +21,11 @@ int dhtPin = 32;
 int dhtType = 11;
 int pinValue = 0;
 int thresholdMoistureValue = 20;
-int maxMoistureValue = 100;
+int maxMoistureValue = 100; //you can figire out the max mositure value by imersing the sensor in fully watered plant mine was 45 but i haven't changed in this code
 int relayPinStatus = 0;
 
-char ssid[] = "Shiva";
-char pass[] = "Jai_Sharabeshwara_Swami";
+char ssid[] = "";
+char pass[] = "";  //Put your wi-fi ssid and password
 
 
 //Declaring object of BlykTimer and DHT
@@ -51,12 +51,6 @@ void sendSoilMoisture()
   int measuredMoisture = map(value,0,4095,0,100);
   int moisture = maxMoistureValue - measuredMoisture;
   Blynk.virtualWrite(V1,moisture);
-
-  // if(moisture < thresholdMoistureValue)
-  // {
-  //   digitalWrite(motorRelayPin,HIGH);
-  //   Blynk.virtualWrite(V0,HIGH);
-  // }
 
   if(moisture >= maxMoistureValue)
   {
